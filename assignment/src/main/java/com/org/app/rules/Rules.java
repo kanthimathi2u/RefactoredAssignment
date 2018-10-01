@@ -117,7 +117,7 @@ public class Rules {
 
 	/**
 	 * checks if currentLiteral is smaller than the previous one. This rule is applied when repeatable literals can
-	 * occur 4 times only if the 3rd and 4th occurance has a smaller value between them.
+	 * occur 4 times only if the 3rd and 4th occurrence has a smaller value between them.
 	 * @param CurrentLiteral
 	 * @param keyForValueContainingThree
 	 * @return
