@@ -88,7 +88,7 @@ public class OutputProcess extends InputProcess{
 	 * @param output
 	 * @return the formatted output String
 	 */
-	private static String outputFormatter(ArrayList<String> output){
+	public static String outputFormatter(ArrayList<String> output){
 		return output.toString().replace(",", "").replace("[", "").replace("]", "");
 	}
 
@@ -97,7 +97,7 @@ public class OutputProcess extends InputProcess{
 	 * @param query
 	 * @return boolean value based on the input validity
 	 */
-	private static boolean isValidinput(String query){
+	public static boolean isValidinput(String query){
 		Pattern regex = Pattern.compile("[$&+,:;=@#|]");
 		Matcher matcher = regex.matcher(query);
 		if (matcher.find()){
