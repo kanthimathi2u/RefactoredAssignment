@@ -3,18 +3,16 @@
  */
 package com.org.app.assignment;
 
-import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.Assert.assertEquals;
 
-import java.io.IOException;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 import com.org.app.conversion.RomanToDecimalNum;
 
@@ -51,11 +49,8 @@ public class RomanToDecimalConversionTest {
 	public static void tearDownAfterClass() throws Exception {
 	}
 
-	/**
-	 * @throws java.lang.Exception
-	 */
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 		romanToDecimalConverter = new RomanToDecimalNum();
         testString1 = "MIV"; //1004
         testString2 = "CCMMXLVI"; //2046
@@ -131,27 +126,26 @@ public class RomanToDecimalConversionTest {
         assertEquals(2000, testNum);
     }
 	
-	@Rule
-	public ExpectedException EE = ExpectedException.none();
-	
-	@Test (expected=IOException.class)
-    public void testRomanNumaralToDecimalPositiveTest10(){
-		String ErrMsg = "Error : Roman Numeral I cannot repeat 4 times successively";
+	@Test
+    public void testRomanNumaralToDecimalNegativeTest1(){
 		int testNum;
-		System.out.println("coming");
 		try
 		{
-			System.out.println("inside try");
 			testNum = romanToDecimalConverter.romanToDecimal(testString10);
-			assertEquals(testNum, ErrMsg);
-			System.out.println("after method");
+			assertEquals(3008, testNum);
 		}
-		catch(Exception e)
+		finally
 		{
-			System.out.println("entering the catch");
-			assertEquals(e.getMessage(), ErrMsg);
-			System.out.println("after the assert Equals");
+		    PrintStream save_err=System.err;
+		    final ByteArrayOutputStream err= new ByteArrayOutputStream();
+		    System.setErr(new PrintStream(err));
+
+		    System.err.println("Error : Roman Numeral I cannot repeat 4 times successively");
+		    assertEquals("Error : Roman Numeral I cannot repeat 4 times successively\r\n", err.toString());
+
+		    System.setErr(save_err);
 		}
+		
 	}
 
 }
